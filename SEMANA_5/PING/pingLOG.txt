@@ -1,0 +1,42 @@
+05/08/2025 
+21:09:30.21  
+
+Haciendo ping a google.com [2800:3f0:4005:40a::200e] con 32 bytes de datos:
+Respuesta desde 2800:3f0:4005:40a::200e: tiempo=22ms 
+Respuesta desde 2800:3f0:4005:40a::200e: tiempo=20ms 
+Respuesta desde 2800:3f0:4005:40a::200e: tiempo=22ms 
+Respuesta desde 2800:3f0:4005:40a::200e: tiempo=21ms 
+
+Estad¡sticas de ping para 2800:3f0:4005:40a::200e:
+    Paquetes: enviados = 4, recibidos = 4, perdidos = 0
+    (0% perdidos),
+Tiempos aproximados de ida y vuelta en milisegundos:
+    M¡nimo = 20ms, M ximo = 22ms, Media = 21ms
+05/08/2025 
+21:09:33.32  
+
+Haciendo ping a amazon.com [205.251.242.103] con 32 bytes de datos:
+Respuesta desde 205.251.242.103: bytes=32 tiempo=91ms TTL=238
+Respuesta desde 205.251.242.103: bytes=32 tiempo=94ms TTL=238
+Respuesta desde 205.251.242.103: bytes=32 tiempo=87ms TTL=238
+Respuesta desde 205.251.242.103: bytes=32 tiempo=88ms TTL=238
+
+Estad¡sticas de ping para 205.251.242.103:
+    Paquetes: enviados = 4, recibidos = 4, perdidos = 0
+    (0% perdidos),
+Tiempos aproximados de ida y vuelta en milisegundos:
+    M¡nimo = 87ms, M ximo = 94ms, Media = 90ms
+05/08/2025 
+21:09:36.55  
+
+Haciendo ping a mercadoLibre.com [3.174.238.105] con 32 bytes de datos:
+Respuesta desde 3.174.238.105: bytes=32 tiempo=19ms TTL=246
+Respuesta desde 3.174.238.105: bytes=32 tiempo=18ms TTL=246
+Respuesta desde 3.174.238.105: bytes=32 tiempo=18ms TTL=246
+Respuesta desde 3.174.238.105: bytes=32 tiempo=19ms TTL=246
+
+Estad¡sticas de ping para 3.174.238.105:
+    Paquetes: enviados = 4, recibidos = 4, perdidos = 0
+    (0% perdidos),
+Tiempos aproximados de ida y vuelta en milisegundos:
+    M¡nimo = 18ms, M ximo = 19ms, Media = 18ms
