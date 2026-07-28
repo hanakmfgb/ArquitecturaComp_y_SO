@@ -1,0 +1,11 @@
+La API de Entrada/Salida de Robocopy (/MT):
+Con /MT:8 estamos haciendo que la CPU cree 8 hilos (threads) de ejecución en paralelo para realizar operaciones de lectura y escritura en disco de forma concurrente. Esto reduce drásticamente el cuello de botella de I/O cuando hay muchos archivos pequeños (por ejemplo, código fuente o documentos de Word).
+
+La diferencia de sistemas de archivos (/FFT):
+El parámetro /FFT (FAT File Times) es clave. NTFS (el sistema de Windows) mide el tiempo de modificación de los archivos con precisión de 100 nanosegundos, mientras que FAT32/exFAT (común en memorias USB) tiene una precisión de 2 segundos. Sin /FFT, robocopy podría pensar que todos los archivos son diferentes debido a esa diferencia de milisegundos y volvería a copiar todo innecesariamente.
+
+El mecanismo de ErrorLevel:
+En programación de sistemas, ErrorLevel es el valor de retorno que un proceso de Windows entrega al sistema operativo al terminar. En la mayoría de programas, 0 es éxito y cualquier otro número es error. Sin embargo, en robocopy, un ErrorLevel de 1 significa "Se copiaron archivos con éxito", y 3 significa "Se copiaron archivos y se detectaron archivos adicionales". Es un gran ejemplo para enseñar la gestión de códigos de salida.
+La integración de SharePoint vía Sistema de Archivos:
+
+¿Por qué no usamos comandos web?. La integración de la nube en los sistemas operativos modernos no se hace "programando la petición HTTP" en cada script, sino mediante un driver de sistema de archivos virtualizado (el cliente OneDrive/SharePoint) que monta la nube en el árbol jerárquico local de Windows. El script solo copia de manera local, y es el S.O. quien se encarga de resolver la subida HTTPS en segundo plano.
