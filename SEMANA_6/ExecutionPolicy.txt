@@ -1,0 +1,3 @@
+Abrimos el Windows PowerShell como administrador y ejecutamos el comando «Get-ExecutionPolicy» si aparece «Restricted» o lo que es lo mismo «Restringido». Para cambiar esta configuración basta con ejecutar «Set-ExecutionPolicy Unrestricted» y indicar Si[S].
+
+

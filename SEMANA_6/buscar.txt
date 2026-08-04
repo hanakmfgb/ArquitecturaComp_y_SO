@@ -1,0 +1,94 @@
+Busque un archivo en todo el disco.
+
+Get-ChildItem -Path C:\ -Filter test.txt -Recurse -ErrorAction SilentlyContinue -Force 
+
+
+Busque un archivo en todo el disco, pero muestre la ruta de acceso completa.
+
+Get-ChildItem -Path C:\ -Filter test.txt -Recurse -ErrorAction SilentlyContinue -Force | % { $_.fullname }
+
+
+Busque archivos modificados en los últimos 10 días
+
+$Days = 10
+$Time = (Get-Date).Adddays(-($Days))
+Get-ChildItem -Path C:\ -Filter *.txt -Recurse -ErrorAction SilentlyContinue -Force | Where-Object { $_.LastWriteTime -gt $Time }
+
+
+----------------------------
+
+PowerShell: FileSystemWatcher
+
+Con el método que presentaremos a continuación seremos capaces de detectar si se ha creado un fichero nuevo en una carpeta e inmediatamente a la detección de un fichero nuevo ejecutar un script.
+
+No será necesaria ninguna tarea programada recurrente y tendremos la ventaja de que se ejecuta sólo si hay un fichero nuevo e inmediatamente después de que se genere el fichero además el uso de recursos es muy bajo.
+
+Ejemplo de código:
+
+$watcher = New-Object System.IO.FileSystemWatcher
+$watcher.Path = 'C:\1\'
+$watcher.EnableRaisingEvents = $true
+
+$action =
+{
+    $FullPath = $event.SourceEventArgs.FullPath
+    $ChangeType = $event.SourceEventArgs.ChangeType
+    Write-Host "$(Get-Date)Nuevo $FullPath detectado $ChangeType"
+
+    #Emitimos pitido    
+    [console]::Beep()
+    
+    #Abrimos calculadora
+    calc
+
+}
+
+Register-ObjectEvent $watcher 'Created' -Action $action
+
+Explicación:
+
+Usamos el cmdlet Register-ObjectEvent que realiza la suscripción a los eventos generados por los objetos de .NET Framework en el equipo local o en un equipo remoto.
+
+Es decir avisamos a Windows que si se da cierto evento (creación de un fichero) queremos ejecutar un código ($accion), de esta forma si Windows detecta un nuevo fichero lanzará el código que haya en $accion.
+
+El código de $accion solo será ejecutado sólo si Windows detecta este evento.
+
+En el apartado $action = {} podemos añadir cualquier código de PowerShell, en nuestro caso nos hemos limitado a mostrar un mensaje, emitir un pitido y abrir la calculadora pero podríamos hacer cualquier cosa.
+
+Una vez terminado, si lo deseamos, podemos desregistar el “vigilador” ejecutando:
+
+Get-EventSubscriber | Unregister-Event
+
+Notas finales:
+
+En este caso hemos usado el cmdlet Register-ObjectEvent para detectar creación de ficheros pero se puede utilizar en infinidad de situaciones como por ejemplo:
+
+- Detectar si se ha enchufado un pen usb.
+
+- Detectar si se ha modificado la configuración de pantalla (incluso conectado un hdmi, usb-c o dockstation…)
+
+- Detectar que se han conectado los auriculares.
+
+- Detectar que se ha hecho un cambio de usuario.
+
+- Detectar que se ha descargado o subido un fichero.
+
+- Detectar que se han modificado las fuentes del sistema.
+
+- Detectar que se ha cambiado la hora del sistema.
+
+- Detectar que se ha enchufado el cargador de batería.
+
+
+
+IF PowerShell: Ejemplos prácticos
+Ahora podemos ejecutar una sentencia IF de Powershell para imprimir los servicios en ejecución. En función de cual sea el estado de dicho servicio haremos que se imprima por pantalla de color verde si se trata de un servicio en ejecución, mientras que los servicios que estén parados, haremos que se muestren en nuestra pantalla de color rojo:
+
+PS C:\> get-service | foreach-object{ if ($_.status -eq "stopped") {write-host -f red $_.name $_.status}` else{ write-host -f green $_.name $_.status}}.
+ 
+
+
+https://sistemasyoperativos.com/2019/12/19/examen-practico-powershell-enunciados-y-soluciones/
+
+
+https://www.jesusninoc.com/07/04/4-gestion-del-sistema-de-archivos-en-powershell/#Ejemplo-2
